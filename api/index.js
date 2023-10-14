@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 mongoose
@@ -17,6 +18,7 @@ mongoose
 const app = express();
 
 app.use(express.json()); // we are not allowed to send any Json to the server, so this is going to alloe Json as input of the server.
+app.use(cookieParser());
 
 const port = 3000;
 app.listen(port, () => {
@@ -26,14 +28,13 @@ app.listen(port, () => {
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 
-
 /* middleware to handle errors */
-app.use((err, req, res, next)=>{
+app.use((err, req, res, next) => {
   const satusCode = err.statusCode || 500;
-  const message = err.message ||"Internal Server Error";
+  const message = err.message || "Internal Server Error";
   return res.status(satusCode).json({
     success: false,
     satusCode,
     message,
-  })
+  });
 });
