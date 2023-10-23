@@ -63,8 +63,7 @@ export default function Profile() {
     if (file) {
       handleFileUpload(file);
     }
-  },[file]);
-
+  }, [file]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
