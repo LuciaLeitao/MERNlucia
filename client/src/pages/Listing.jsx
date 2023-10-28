@@ -15,17 +15,16 @@ import {
 } from "react-icons/fa";
 import Contact from "../components/Contact";
 
-
 function Listing() {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [contact, setContact]=useState(false);
+  const [contact, setContact] = useState(false);
   const params = useParams();
-  const {currentUser} = useSelector((state)=>state.user);
-  
+  const { currentUser } = useSelector((state) => state.user);
+
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -47,7 +46,6 @@ function Listing() {
       }
     };
     fetchListing();
-    
   }, [params.listingId]);
   return (
     <main>
@@ -109,7 +107,16 @@ function Listing() {
               </p>
               {listing.offer && (
                 <p className="bg-green-700 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                  €{+listing.regularPrice - +listing.discountPrice}{" "}
+                  {listing.offer
+                    ? new Intl.NumberFormat("de-DE", {
+                        style: "currency",
+                        currency: "EUR",
+                      }).format(listing.discountPrice)
+                    : new Intl.NumberFormat("de-DE", {
+                        style: "currency",
+                        currency: "EUR",
+                      }).format(listing.regularPrice)}{" "}
+                  OFF{" "}
                 </p>
               )}
             </div>
@@ -141,16 +148,16 @@ function Listing() {
                 {listing.furnished ? "Furnished" : "Not Furnished"}
               </li>
             </ul>
-            {currentUser && !contact && listing.userRef !== currentUser._id &&(
-
-            <button onClick={()=>setContact(true)} className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3">Contact Landlord</button>
-          
-            
+            {currentUser && !contact && listing.userRef !== currentUser._id && (
+              <button
+                onClick={() => setContact(true)}
+                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
+              >
+                Contact Landlord
+              </button>
             )}
-            {contact && <Contact listing={listing}/>}
-           
+            {contact && <Contact listing={listing} />}
           </div>
-      
         </div>
       )}
     </main>
