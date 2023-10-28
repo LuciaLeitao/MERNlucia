@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
+import { FaSmileBeam } from "react-icons/fa";
 
 function Search() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Search() {
   });
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
-  console.log(listings);
+  const [showMore, setShowMore] = useState(false);
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
@@ -47,9 +48,15 @@ function Search() {
 
     const fetchListings = async () => {
       setLoading(true);
+      setShowMore(FaSmileBeam);
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
+      if (data.length > 8) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
       setListings(data);
       setLoading(false);
     };
@@ -98,6 +105,24 @@ function Search() {
 
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
+  };
+
+  const onShowMoreClick = async () => {
+    try {
+      const numberOfListings = listings.length;
+      const startIndex = numberOfListings;
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set("startIndex", startIndex);
+      const searchQuery = urlParams.toString();
+      const res = await fetch(`/api/listing/get?${searchQuery}`);
+      const data = await res.json();
+      if (data.length < 9) {
+        setShowMore(false);
+      }
+      setListings([...listings, ...data]);
+    } catch (error) {
+      console.error("An error occurred while fetching data:", error);
+    }
   };
   return (
     <div className="flex flex-col md:flex-row">
@@ -217,6 +242,14 @@ function Search() {
             listings.map((listing) => (
               <ListingItem key={listing._id} listing={listing} />
             ))}
+          {showMore && (
+            <button
+              className="text-green-700 hover:underline p-7 w-full"
+              onClick={onShowMoreClick}
+            >
+              Show More
+            </button>
+          )}
         </div>
       </div>
     </div>
