@@ -125,7 +125,7 @@ function Search() {
     }
   };
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row  p-7">
       <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
@@ -219,16 +219,16 @@ function Search() {
               <option value={"createdAt_asc"}>Oldest</option>
             </select>
           </div>
-          <button className="bg-slate-700 text-white p-3 uppercase rounded-lg hover:opacity-95">
+          <button className="bg-neutral-800 text-white p-3 uppercase rounded-lg hover:opacity-95">
             Search
           </button>
         </form>
       </div>
-      <div className="">
-        <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">
+      <div className="flex flex-col items-center justify-center lg:items-start">
+        <h1 className="text-3xl font-semibold border-b p-3 text-neutral-800 mt-5 ">
           Listing Results:
         </h1>
-        <div className="p-7 flex flex-wrap gap-4">
+        <div className="p-7 flex flex-wrap gap-4 justify-center">
           {!loading && listings.length === 0 && (
             <p className="text-xl text-slate-700">No Listing Found</p>
           )}

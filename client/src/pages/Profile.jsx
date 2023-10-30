@@ -130,6 +130,7 @@ export default function Profile() {
       setShowListingsError(false);
       const res = await fetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
+      console.log(data);
       if (data.success === false) {
         setShowListingsError(true);
         return;
@@ -139,6 +140,7 @@ export default function Profile() {
     } catch (error) {
       setShowListingsError(true);
     }
+    
   };
 
   const handleListingDelete = async (listingId) => {
@@ -214,17 +216,21 @@ export default function Profile() {
         />
         <button
           disabled={loading}
-          className="bg-slate-700 text-white text-center rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
+          className="bg-neutral-600 shadow-md font-bold tracking-wide text-white text-center rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
         >
           {loading ? "Loading..." : "Update"}
         </button>
         <Link
           to={"/create-listing"}
-          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
+          className="bg-gradient-to-r from-amber-400 via-amber-400 to-amber-300 tracking-wide text-white p-3 rounded-lg font-bold shadow-md uppercase text-center hover:opacity-95"
         >
           Create Listing
         </Link>
       </form>
+        <button onClick={handleShowListings} className="bg-neutral-800 tracking-wide text-white mt-4 p-3 rounded-lg font-bold uppercase text-center hover:opacity-95 w-full shadow-md">
+        Show Listings
+      </button>
+      
       <div className="flex justify-between mt-5">
         <span
           onClick={handleDeleteUser}
@@ -236,25 +242,24 @@ export default function Profile() {
           Sign out
         </span>
       </div>
+      
 
       <p className="text-red-700 mt-5">{error ? error : " "}</p>
       <p className="text-green-700 mt-5">
         {updateSuccess ? "User is updated successfully!" : ""}
       </p>
-      <button onClick={handleShowListings} className="text-green-700 w-full">
-        Show Listings
-      </button>
+      
       <p className="text-red-700 mt-5">
         {showListingsError ? "Error showing listings" : " "}
       </p>
 
       {userListings && userListings.length > 0 && 
-      <div className="flex flex-col gap-4">
-      <h1 className="text-center mt-7 text-2xl font-semibold uppercase">Your Listing</h1>
+      <div className="flex flex-col gap-4 ">
+      <h1 className="text-center text-zinc-800 border-amber-300 border-b-2 mt-7 text-2xl font-semibold uppercase">Your Listing</h1>
       {  userListings.map((listing) => (
             <div
               key={listing._id}
-              className="border rounded-lg p-3 flex justify-between items-center gap-4"
+              className="border rounded-lg bg-zinc-100 shadow-md p-3 flex justify-between items-center gap-4"
             >
               <Link to={`/listing/${listing._id}`}>
                 <img

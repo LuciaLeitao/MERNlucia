@@ -34,10 +34,14 @@ function ListingItem({ listing }) {
               ? new Intl.NumberFormat("de-DE", {
                   style: "currency",
                   currency: "EUR",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
                 }).format(listing.discountPrice)
               : new Intl.NumberFormat("de-DE", {
                   style: "currency",
                   currency: "EUR",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
                 }).format(listing.regularPrice)}
             {listing.type === "rent" && " /month"}{" "}
           </p>

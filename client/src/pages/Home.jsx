@@ -49,11 +49,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="">
       {/* Top */}
       <div className=" flex flex-col gap-6 p-7 px-3 max-w-6xl mx-auto">
-        <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
-          Find your next <span className="text-slate-50">perfect</span>
+        <h1 className="text-neutral-800 font-bold text-3xl lg:text-6xl">
+          Find your next <span className="font-bold bg-gradient-to-r from-amber-300 to-amber-400 bg-clip-text text-transparent">perfect</span>
           <br />
           place with ease
         </h1>
@@ -63,7 +63,7 @@ export default function Home() {
         </p>
         <Link
           to={"/search"}
-          className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
+          className="text-xs sm:text-sm hover:text-neutral-600 font-bold text-yellow-500"
         >
           {" "}
           Let´s get started...
@@ -72,9 +72,9 @@ export default function Home() {
 
       {/* swiper */}
       <Swiper navigation>
-        {offerListings &&
-          offerListings.length > 0 &&
-          offerListings.map((listing) => (
+        {saleListings &&
+          saleListings.length > 0 &&
+          saleListings.map((listing) => (
             <SwiperSlide>
               <div
                 style={{
@@ -87,26 +87,26 @@ export default function Home() {
             </SwiperSlide>
           ))}
       </Swiper>
-
+      <div className="flex flex-wrap justify-center">
       {/* listing results for offer sale and rent*/}
 
       {/* -------------Listing results for Offer-------------------- */}
 
-      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+      <div className="max-w-6xl w-auto p-3 flex flex-col gap-8 my-10 ">
         {offerListings && offerListings.length > 0 && (
           <div className="">
-            <div className="">
+            <div className=" ">
               <h2 className="text-2xl font-semibold text-slate-600">
                 Recent offers
               </h2>
               <Link
-                className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
+                className="text-xs sm:text-sm hover:text-neutral-600 font-bold text-yellow-500"
                 to={"/search?offer=true"}
               >
                 Show more offers
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 ">
               {offerListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -122,13 +122,13 @@ export default function Home() {
                 Recent places for sale
               </h2>
               <Link
-                className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
+                className="text-xs sm:text-sm hover:text-neutral-600  text-yellow-500 font-bold "
                 to={"/search?type=sale"}
               >
                 Show more places for sale
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4  w-auto">
               {saleListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -143,13 +143,13 @@ export default function Home() {
                 Recent places for rent
               </h2>
               <Link
-                className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
+                className="text-xs sm:text-sm  hover:text-neutral-600 font-bold text-yellow-500"
                 to={"/search?type=rent"}
               >
                 Show more places for rent
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 w-auto">
               {rentListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -157,6 +157,7 @@ export default function Home() {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 }

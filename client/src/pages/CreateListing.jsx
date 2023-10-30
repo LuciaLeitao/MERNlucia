@@ -254,7 +254,7 @@ export default function CreateListing() {
                 type="number"
                 id="bedrooms"
                 min="1"
-                max="100"
+                max="1000"
                 required
                 className="p-3 border
             border-gray-300 rounded-lg"
@@ -269,7 +269,7 @@ export default function CreateListing() {
                 type="number"
                 id="bathrooms"
                 min="1"
-                max="100"
+                max="1000"
                 required
                 className="p-3 border
             border-gray-300 rounded-lg"
@@ -284,7 +284,7 @@ export default function CreateListing() {
                 type="number"
                 id="regularPrice"
                 min="50"
-                max="10000000"
+                max="1000000000"
                 required
                 className="p-3 border
             border-gray-300 rounded-lg"
@@ -294,8 +294,7 @@ export default function CreateListing() {
               <div className="flex flex-col items-center">
                 <p>Regular Price</p>
                 {formData.type === "rent" && (
-                <span className="text-xs">(€ /month)</span>
-
+                  <span className="text-xs">(€ /month)</span>
                 )}
               </div>
             </div>
@@ -306,7 +305,7 @@ export default function CreateListing() {
                   type="number"
                   id="discountPrice"
                   min="0"
-                  max="10000000"
+                  max="1000000000"
                   required
                   className="p-3 border
             border-gray-300 rounded-lg"
@@ -316,10 +315,8 @@ export default function CreateListing() {
                 <div className="flex flex-col items-center">
                   <p>Discounted Price</p>
                   {formData.type === "rent" && (
-                <span className="text-xs">(€ /month)</span>
-
-                )}
-                  
+                    <span className="text-xs">(€ /month)</span>
+                  )}
                 </div>
               </div>
             )}
@@ -377,7 +374,7 @@ export default function CreateListing() {
             ))}
           <button
             disabled={loading || uploading}
-            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+            className="p-3 bg-neutral-800 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
           >
             {loading ? "Creating..." : "Create listing"}
           </button>

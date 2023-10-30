@@ -83,8 +83,11 @@ function Listing() {
               Link copied!
             </p>
           )}
+          {/* -----------------Info Container ----------------------------- */}
           <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4 ">
+           {/* -----------------> Titulo  <-----------*/}
             <p className=" text-2xl font-semibold">{listing.name}</p>
+            {/* -----------------> Preço  <-----------*/}
             <p className=" text-slate-600  text-2xl font-semibold">
               {listing.offer
                 ? new Intl.NumberFormat("de-DE", {
@@ -94,9 +97,12 @@ function Listing() {
                 : new Intl.NumberFormat("de-DE", {
                     style: "currency",
                     currency: "EUR",
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
                   }).format(listing.regularPrice)}
               {listing.type === "rent" && " /month"}{" "}
             </p>
+             {/* -----------------> Morada  <-----------*/}
             <p className="flex items-center mt-6 gap-2 text-slate-600 text-sm">
               <FaMapMarkerAlt className="text-green-700" />
               {listing.address}
@@ -115,6 +121,8 @@ function Listing() {
                     : new Intl.NumberFormat("de-DE", {
                         style: "currency",
                         currency: "EUR",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
                       }).format(listing.regularPrice)}{" "}
                   OFF{" "}
                 </p>
@@ -151,7 +159,7 @@ function Listing() {
             {currentUser && !contact && listing.userRef !== currentUser._id && (
               <button
                 onClick={() => setContact(true)}
-                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
+                className="bg-neutral-800 text-white rounded-lg uppercase hover:opacity-95 p-3"
               >
                 Contact Landlord
               </button>
