@@ -23,9 +23,17 @@ function ListingItem({ listing }) {
           <div className="flex items-center gap-2">
             <MdLocationOn className="h-4 w-4 text-green-700 " />
             <p className="text-sm text-gray-600 truncate w-full">
-              {listing.address}
+              <a
+                href={"https://www.google.com/maps/place/?q=" + listing.address}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {listing.address}
+              </a>
+            
             </p>
           </div>
+          
           <p className="text-sm text-gray-600 line-clamp-3 ">
             {listing.description}
           </p>

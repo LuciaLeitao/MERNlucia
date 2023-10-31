@@ -93,6 +93,8 @@ function Listing() {
                 ? new Intl.NumberFormat("de-DE", {
                     style: "currency",
                     currency: "EUR",
+                    minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
                   }).format(listing.discountPrice)
                 : new Intl.NumberFormat("de-DE", {
                     style: "currency",
@@ -103,9 +105,15 @@ function Listing() {
               {listing.type === "rent" && " /month"}{" "}
             </p>
              {/* -----------------> Morada  <-----------*/}
-            <p className="flex items-center mt-6 gap-2 text-slate-600 text-sm">
+            <p className="flex items-center mt-6 gap-2 text-slate-600 text-sm hover:underline">
               <FaMapMarkerAlt className="text-green-700" />
-              {listing.address}
+              <a
+                href={"https://www.google.com/maps/place/?q=" + listing.address}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {listing.address}
+              </a>
             </p>
             <div className="flex gap-4">
               <p className="bg-red-700 w-full max-w-[200px] text-white text-center p-1 rounded-md">
@@ -117,6 +125,8 @@ function Listing() {
                     ? new Intl.NumberFormat("de-DE", {
                         style: "currency",
                         currency: "EUR",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
                       }).format(listing.discountPrice)
                     : new Intl.NumberFormat("de-DE", {
                         style: "currency",
